@@ -1,0 +1,106 @@
+<%- include("partials/header.ejs") %>
+
+<%if(!content) {%>
+<div class="rates">
+    <h3>Rates of currency</h3>
+    <form action="/convert" method="post">
+        <label for="fromCurrency">From Currency:</label>
+        <select id="fromCurrency" name="fromCurrency" onchange="updateCurrencySign()">
+            <% Object.keys(currency).forEach(function(code) { %>
+                <option value="<%= code %>"><%= code %> - <%= currency[code] %></option>
+            <% }); %>
+        </select>
+        
+        <label for="toCurrency">To Currency:</label>
+        <select id="toCurrency" name="toCurrency">
+            <% Object.keys(currency).forEach(function(code) { %>
+                <option value="<%= code %>"><%= code %> - <%= currency[code] %></option>
+            <% }); %>
+        </select>
+        
+        <label for="rateOption">Choose Rate Option:</label>
+        <select id="rateOption" name="rateOption" onchange="toggleDateInput()">
+            <option value="latest">Latest Rates</option>
+            <option value="historical">Historical Rates</option>
+        </select>
+        
+        <div id="dateInput" style="display: none;">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" value="<%= date %>">
+        </div>
+
+        <label for="amountOption">Choose Amount Option:</label>
+        <select id="amountOption" name="amountOption" onchange="toggleAmountInput()">
+            <option value="default">Default Amount</option>
+            <option value="custom">Custom Amount</option>
+        </select>
+
+        <div id="amountInput" class="amount-container" style="display: none;">
+            <span id="currencySign" class="currency-sign"></span>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount">
+        </div>
+
+        <button type="submit">Convert</button>
+    </form>
+</div>
+<% } else if (content) { %>
+<div class="conversion-result">
+        <h3>Conversion Result:</h3>
+        <p>From Currency: <%= fromCurrency %> - To Currency: <%= toCurrency %></p>
+        <p>Date: <% if (rateOption === 'latest') { %>
+          Latest Rate
+        <% } else { %>
+        <%= date  %>
+        <% } %></p>
+        <% if (amountOption === 'custom') { %>
+            <p>Amount: <%= amount %> <%= fromCurrency %></p>
+        <% } else { %>
+            <p>Amount: 1 <%= fromCurrency %></p>
+        <% } %>
+        <p>Result: <%= content.rates[toCurrency] %> <%= toCurrency %></p>
+        <form action="/back" method="get">
+            <button type="submit">Convert Again</button>
+        </form>
+        <% } %>
+</div>
+
+<div class="currency">
+    <h3>Currency List</h3>
+    <ul>
+        <% Object.keys(currency).forEach(function(code) { %>
+            <li><%= code %> - <%= currency[code] %></li>
+        <% }); %>
+    </ul>
+</div>
+
+<script>
+    function toggleDateInput() {
+        const rateOption = document.getElementById("rateOption").value;
+        const dateInput = document.getElementById("dateInput");
+        if (rateOption === "historical") {
+            dateInput.style.display = "block";
+        } else {
+            dateInput.style.display = "none";
+        }
+    }
+
+    function toggleAmountInput() {
+        const amountOption = document.getElementById("amountOption").value;
+        const amountInput = document.getElementById("amountInput");
+        if (amountOption === "custom") {
+            amountInput.style.display = "block";
+            updateCurrencySign();
+        } else {
+            amountInput.style.display = "none";
+        }
+    }
+
+    function updateCurrencySign() {
+        const fromCurrency = document.getElementById("fromCurrency");
+        const selectedCurrency = fromCurrency.options[fromCurrency.selectedIndex].text;
+        const currencySign = selectedCurrency.split(' ')[0];
+        document.getElementById("currencySign").textContent = currencySign;
+    }
+</script>
+
+<%- include("partials/footer.ejs") %>

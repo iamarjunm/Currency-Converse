@@ -1,0 +1,234 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif font */
+    background-color: #10162f; /* Dark blue background */
+    color: #ffffff; /* White text color */
+    line-height: 1.6;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Main container styles */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+h1 {
+    font-size: 3rem; /* Large heading size */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3cc5f4; /* Cyan text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+}
+
+/* Navigation styles (if any) */
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: #ffffff; /* White text color */
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+nav a:hover {
+    color: #3cc5f4; /* Cyan color on hover */
+}
+
+/* Form styles */
+.rates, .conversion-result, .currency {
+    background-color: #1e2a4a; /* Dark blue for sections */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Soft shadow */
+}
+
+.rates h3, .conversion-result h3, .currency h3 {
+    font-size: 2rem; /* Large heading size */
+    margin-bottom: 20px;
+    color: #3cc5f4; /* Cyan text color */
+}
+
+/* Reverting to flex display */
+.rates form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.rates label {
+    margin-right: 10px;
+    color: #ffffff; /* White text color */
+}
+
+.rates select, .rates input[type="date"], .rates input[type="number"], .rates button {
+    margin: 5px;
+    padding: 12px;
+    font-size: 1rem; /* Standard font size */
+    border: 1px solid #3cc5f4; /* Cyan border */
+    border-radius: 8px;
+    background-color: rgba(60, 197, 244, 0.1); /* Cyan transparent background */
+    color: #ffffff; /* White text color */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.rates select {
+    flex: 1;
+    max-width: 200px;
+}
+
+.rates select option {
+    background-color: #1e2a4a; /* Dark blue background for options */
+    color: #b0c4de; /* Light steel blue text color for better contrast */
+}
+
+.rates select:focus, .rates input[type="date"]:focus, .rates input[type="number"]:focus, .rates button:focus {
+    outline: none;
+    background-color: rgba(60, 197, 244, 0.3); /* Lighter cyan on focus */
+    transform: scale(1.02); /* Slight scale on focus */
+}
+
+.rates button {
+    background-color: #3cc5f4; /* Cyan button */
+    color: #ffffff; /* White text color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rates button:hover {
+    background-color: #1e88e5; /* Darker cyan on hover */
+}
+
+/* Hide amountInput initially */
+.amount-container {
+    display: none;
+}
+
+/* Style for amountInput when shown */
+.amount-container.active {
+    display: block;
+    margin-top: 10px;
+}
+
+.currency {
+    background-color: #1e2a4a; /* Dark blue background */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Soft shadow */
+}
+
+.currency h3 {
+    font-size: 2rem; /* Large heading size */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3cc5f4; /* Cyan text color */
+}
+
+.currency ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.currency li {
+    font-size: 1.2rem; /* Font size for list items */
+    margin-bottom: 5px;
+    color: #ffffff; /* White text color */
+}
+
+.currency li:before {
+    content: '\2022'; /* Bullet point */
+    color: #3cc5f4; /* Cyan color */
+    font-size: 1rem; /* Bullet size */
+    margin-right: 10px;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #1e2a4a; /* Dark blue background */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #3cc5f4; /* Cyan border on top */
+}
+
+.footer a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #ffffff; /* White text color */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.footer a:hover {
+    color: #3cc5f4; /* Cyan color on hover */
+}
+
+.footer img {
+    height: 40px;
+    padding: 5px;
+}
+
+/* Convert button animation */
+@keyframes convertButtonAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.rates button, .conversion-result button {
+    animation: convertButtonAnimation 0.5s ease; /* Apply animation on convert button */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1.2rem; /* Slightly larger font size */
+}
+
+.conversion-result button {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #3cc5f4;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.conversion-result button:hover {
+    background-color: #1e88e5; /* Darker cyan on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .rates, .conversion-result, .currency {
+        padding: 15px;
+    }
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+    }
+    .footer a {
+        margin: 5px;
+    }
+}
